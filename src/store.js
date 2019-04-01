@@ -7,27 +7,6 @@ import router from '@/router';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-    state: {
-        recipes: [],
-        apiUrl: 'https://api.edamam.com/search',
-        user: null,
-        isAuthenticated: false,
-        userRecipes: []
-    },
-    mutations: {
-        setRecipes(state, payload) {
-            state.recipes = payload;
-        },
-        setUser(state, payload) {
-            state.user = payload;
-        },
-        setIsAuthenticated(state, payload) {
-            state.isAuthenticated = payload;
-        },
-        setUserRecipes(state, payload) {
-            state.userRecipes = payload;
-        }
-    },
     actions: {
     
         userLogin({ commit }, { email, password }) {
@@ -77,7 +56,7 @@ export default new Vuex.Store({
                 });
         }        
     },
-    getters: {
+     getters: {
         isAuthenticated(state) {
             return state.user !== null && state.user !== undefined;
         }
