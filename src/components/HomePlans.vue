@@ -10,7 +10,12 @@
                                     <v-flex xs12 align-end flexbox>
                                         <span class="headline black--text"></span>
                                         <div class="display-1 font-weight-black white--text text-xs-center">Available Spots</div>
-                                        <div class="display-4 font-weight-black white--text text-xs-center">75</div>
+
+                                        <div class="display-4 font-weight-black white--text text-xs-center">{{total_count.score-spots_taken.score}}</div>
+                                        <div class="display-4 font-weight-black white--text text-xs-center">{{counter}}</div>
+                                        
+                                           
+                                        
                                     </v-flex>
                                 </v-layout>
                             </v-container>
@@ -28,11 +33,30 @@
 
 <script>
 export default {
-    name: 'HomePlans',
+        name: 'HomePlans',
+        data() {
+            return {
+                total_count: {
+                    score: 75
+                },
+                spots_taken: {
+                    score: 4
+                },
+                counter: 0
+            }
+        },
+
         computed: {
             isAuthenticated() {
                 return this.$store.getters.isAuthenticated;
             }
+        },
+        watch: {
+            counter: function (total_count, spots_taken) {
+                var available_spot = 0;
+                var available_spot = (this.total_count - this.spots_taken);
+                return available_spot
+            },
         },
         methods: {
             logout() {
@@ -55,3 +79,4 @@ export default {
         text-decoration: none;
     }
 </style>
+
