@@ -10,13 +10,8 @@
                                     <v-flex xs12 align-end flexbox>
                                         <span class="headline black--text"></span>
                                         <div class="display-1 font-weight-black white--text text-xs-center">Available Spots</div>
-
-                                        <div class="display-4 font-weight-black white--text text-xs-center">{{total_count.score-spots_taken.score}}</div>
                                         <div class="display-4 font-weight-black white--text text-xs-center">{{counter}}</div>
-                                        
-                                           
-                                        
-                                    </v-flex>
+                                     </v-flex>
                                 </v-layout>
                             </v-container>
                         </v-img>
@@ -32,7 +27,7 @@
 </template>
 
 <script>
-export default {
+    export default {
         name: 'HomePlans',
         data() {
             return {
@@ -40,7 +35,7 @@ export default {
                     score: 75
                 },
                 spots_taken: {
-                    score: 4
+                    score: 11
                 },
                 counter: 0
             }
@@ -52,11 +47,7 @@ export default {
             }
         },
         watch: {
-            counter: function (total_count, spots_taken) {
-                var available_spot = 0;
-                var available_spot = (this.total_count - this.spots_taken);
-                return available_spot
-            },
+
         },
         methods: {
             logout() {
@@ -65,11 +56,20 @@ export default {
             dashboardview() {
                 if (this.$store.getters.isAuthenticated == true)
                     this.$router.replace('/about')
-                else 
+                else
                     this.$router.replace('/')
+            },
+            availability() {
+                var available_spot = 0;
+                available_spot = (this.total_count.score - this.spots_taken.score);
+                //console.log(available_spot);
+                this.counter = available_spot;
             }
+        },
+        beforeMount() {
+            this.availability();
         }
-};
+    };
 </script>
 
 <style scoped>
@@ -77,6 +77,7 @@ export default {
     a {
         color: white;
         text-decoration: none;
+
     }
 </style>
 
